@@ -2,6 +2,7 @@
 #define _TERMINAL_H_
 
 #include "FileSystem.h"
+#include <fstream>
 
 class Terminal {
 
@@ -12,6 +13,7 @@ class Terminal {
         }
 
         void Run();
+        std::vector<std::string> LoadCommands();
 
     private:
 

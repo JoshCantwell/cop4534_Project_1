@@ -1,20 +1,25 @@
 #include "Terminal.h"
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <vector>
 void Terminal::Run() {
         
     std::vector <std::string> commands = {};
     fs = new FileSystem();    
     std::string userChoice = "";
-    
+   
+    //std::vector <std::string> loadedCommands = LoadCommands();
     while(userChoice != "exit") {
 
         userChoice = "";
-    
+   
+        int commandInc = 0;
         int inc = 0;
         std::cout << "$ " ;
         getline( std::cin, userChoice);
 
+        //userChoice = loadedCommands.at(commandInc);
         commands.clear();
             
         std::string word = "";
@@ -36,6 +41,8 @@ void Terminal::Run() {
 
         commands.insert(commands.begin() + inc, word);
 
+        //++commandInc;
+        
         if(commands[0] == "ls") {
 
             std::cout << fs->ls() << std::endl;
@@ -97,6 +104,33 @@ void Terminal::Run() {
 }
 
 
+std::vector<std::string> Terminal::LoadCommands() {
+
+    std::vector<std::string> commands;
+    std::string fileName = "commands.txt";
+   
+    std::string command = "";
+        
+    std::ifstream file;
+    file.open(fileName.c_str());
+    if(file.is_open()) {
+
+        while(!file.eof()) {
+
+            getline(file, command, '\n');
+
+            commands.insert(commands.end(), command);
+            std::cout << command << std::endl;
+            command = "";
+        }
+    } else {
+
+        std::cout << "command file not found" << std::endl;
+
+    }
+
+
+}
 
 
 
