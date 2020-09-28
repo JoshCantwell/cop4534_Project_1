@@ -1,9 +1,10 @@
-#include "../../../cop3530/project-4-JoshCantwell/Terminal.h"
 #include <iostream>
-
+#include "FileSystem.h"
+#include "Terminal.h"
 int main() { 
 
-    std::cout << "Hello world" << std::endl;
+    Terminal *terminal = new Terminal();
+    terminal->Run();
     return 0;
 
 }
